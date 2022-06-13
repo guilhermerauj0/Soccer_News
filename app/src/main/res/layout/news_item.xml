@@ -73,20 +73,30 @@
 
                 <ImageView
                     android:id="@+id/iv_favorite"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="end"
                     android:layout_marginStart="172dp"
                     android:src="@drawable/ic_favorite"
-                    android:contentDescription="@string/favorite" />
+                    android:contentDescription="@string/favorite"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:padding="4dp"
+                    />
+
                 <ImageView
                     android:id="@+id/iv_share"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginHorizontal="16dp"
                     android:layout_gravity="end"
                     android:src="@drawable/ic_share"
-                    android:contentDescription="@string/share" />
+                    android:contentDescription="@string/share"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:selectableItemBackgroundBorderless"
+                    android:padding="4dp" />
             </LinearLayout>
 
         </LinearLayout>
