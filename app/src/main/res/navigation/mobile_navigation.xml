@@ -9,12 +9,20 @@
         android:id="@+id/navigation_news"
         android:name="com.example.soccernews.ui.news.NewsFragment"
         android:label="@string/title_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_navigation_news_to_navigation_favorites"
+            app:destination="@id/navigation_favorites" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.example.soccernews.ui.favorites.FavoritesFragment"
         android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_navigation_favorites_to_navigation_news"
+            app:destination="@id/navigation_news" />
+    </fragment>
 
 </navigation>
