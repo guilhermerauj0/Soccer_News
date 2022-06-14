@@ -4,25 +4,48 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.soccernews.data.remote.SoccerNewsApi;
 import com.example.soccernews.domain.News;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class NewsViewModel extends ViewModel {
 
-    private final MutableLiveData<List<News>> news;
+    private final MutableLiveData<List<News>> news = new MutableLiveData<>();
+    private final SoccerNewsApi api;
 
     public NewsViewModel() {
-        this.news = new MutableLiveData<>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://guilhermerauj0.github.io/soccer_news_api/news.json")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        // TODO Remover mock de noticias
-        List<News> news = new ArrayList<>();
-        news.add(new News("Testando", "Descricao do Testando"));
-        news.add(new News("Queda no campo", "Desfalque meu fi"));
-        news.add(new News("Grande coisa", "Time perde contra time de apenas um jogador"));
+        api = retrofit.create(SoccerNewsApi.class);
+        this.findNews();
 
-        this.news.setValue(news);
+    }
+
+    private void findNews() {
+        api.getNews().enqueue(new Callback<List<News>>() {
+            @Override
+            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+                if( response.isSuccessful()){
+                    news.setValue(response.body());
+                } else{
+                    //TODO Pensar em uma estrategia de tratamento de erros
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<News>> call, Throwable t) {
+                //TODO Pensar em uma estrategia de tratamento de erros
+            }
+        });
     }
 
     public LiveData<List<News>> getNews() {
