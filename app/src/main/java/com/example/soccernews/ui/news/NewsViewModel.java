@@ -3,7 +3,6 @@ package com.example.soccernews.ui.news;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
 import com.example.soccernews.data.remote.SoccerNewsApi;
 import com.example.soccernews.domain.News;
 
