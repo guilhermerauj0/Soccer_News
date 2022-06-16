@@ -3,6 +3,7 @@ package com.example.soccernews.ui.adapter;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,10 +17,12 @@ import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
-    private List<News> news;
+    private final List<News> news;
+    private final View.OnClickListener favoriteListener;
 
-    public NewsAdapter(List<News> news){
+    public NewsAdapter(List<News> news, View.OnClickListener favoriteListener){
         this.news = news;
+        this.favoriteListener = favoriteListener;
     }
 
 
@@ -49,7 +52,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             holder.itemView.getContext().startActivity(browserIntent);
         });
 
-        // SHARE BUTTON OF NEWS | native fuction
+        // SHARE BUTTON OF NEWS | native function
         holder.binding.ivShare.setOnClickListener(view ->{
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
@@ -57,6 +60,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             shareIntent.putExtra(Intent.EXTRA_TEXT, news.getLink());
             holder.itemView.getContext().startActivity(Intent.createChooser(shareIntent, "Share via"));
         });
+
+        // FAVORITE BUTTON OF NEWS | evento instanciado pelo fragment
+        holder.binding.ivFavorite.setOnClickListener( this.favoriteListener);
+
     }
 
     @Override
