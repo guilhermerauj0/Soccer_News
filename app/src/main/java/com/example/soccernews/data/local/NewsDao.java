@@ -12,9 +12,10 @@ import java.util.List;
 @Dao
 public interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(News news);
+    void save(News news);
 
     @Query("SELECT * FROM news WHERE favorite = (:favorite)")
-    List<News> loadFavoriteNews(boolean favorite);
+    List<News> loadFavoriteNews();
+
 
 }
