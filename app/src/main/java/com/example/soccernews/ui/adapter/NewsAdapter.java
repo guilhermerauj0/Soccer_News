@@ -49,6 +49,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             holder.itemView.getContext().startActivity(browserIntent);
         });
 
+        // SHARE BUTTON OF NEWS | native fuction
+        holder.binding.ivShare.setOnClickListener(view ->{
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, news.getLink());
+            holder.itemView.getContext().startActivity(Intent.createChooser(shareIntent, "Share via"));
+        });
     }
 
     @Override
