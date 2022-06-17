@@ -28,9 +28,7 @@ public class SoccerNewsRepository {
                 .build()
                 .create(SoccerNewsApi.class);
 
-        localDb = Room.databaseBuilder(App.getInstance(), SoccerNewsDb.class, LOCAL_DB_NAME)
-                .allowMainThreadQueries()
-                .build();
+        localDb = Room.databaseBuilder(App.getInstance(), SoccerNewsDb.class, LOCAL_DB_NAME).build();
     }
 
     public static SoccerNewsRepository getInstance(){ return LazyHolder.INSTANCE;}

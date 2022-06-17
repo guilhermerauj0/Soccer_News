@@ -28,11 +28,8 @@ public class NewsFragment extends Fragment {
 
         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
-            binding.rvNews.setAdapter(new NewsAdapter(news, updatedNews -> {
-                MainActivity activity = (MainActivity) getActivity();
-                if(activity != null){
-                    activity.getDb().newsDao().save(updatedNews);
-                }
+            binding.rvNews.setAdapter(new NewsAdapter(news, favoriteNews ->{
+                newsViewModel.saveNews(favoriteNews);
             }));
         });
 
