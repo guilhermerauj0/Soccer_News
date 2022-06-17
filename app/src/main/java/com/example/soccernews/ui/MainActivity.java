@@ -1,23 +1,22 @@
-package com.example.soccernews;
+package com.example.soccernews.ui;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
-import com.example.soccernews.data.local.AppDatabase;
+import com.example.soccernews.R;
+import com.example.soccernews.data.local.SoccerNewsDb;
 import com.example.soccernews.databinding.ActivityMainBinding;
-import com.example.soccernews.databinding.FragmentNewsBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private AppDatabase db;
+    private SoccerNewsDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDb() {
-        db = Room.databaseBuilder(this, AppDatabase.class, "soccer-news")
+        db = Room.databaseBuilder(this, SoccerNewsDb.class, "soccer-news")
                 .allowMainThreadQueries()
                 .build();
     }
 
-    public AppDatabase getDb() {
+    public SoccerNewsDb getDb() {
         return db;
     }
 }
