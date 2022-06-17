@@ -28,12 +28,12 @@ public class FavoritesFragment extends Fragment {
 
         binding = FragmentFavoritesBinding.inflate(inflater, container, false);
 
-        localFavoriteNews();
+        loadFavoriteNews();
 
         return binding.getRoot();
     }
 
-    private void localFavoriteNews() {
+    private void loadFavoriteNews() {
         MainActivity activity = (MainActivity) getActivity();
         if (activity != null) {
             List<News> favoriteNews = activity.getDb().newsDao().loadFavoriteNews();

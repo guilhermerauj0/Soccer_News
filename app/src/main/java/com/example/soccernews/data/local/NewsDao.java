@@ -14,7 +14,7 @@ public interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void save(News news);
 
-    @Query("SELECT * FROM news WHERE favorite = (:favorite)")
+    @Query("SELECT * FROM news WHERE favorite = 1")
     List<News> loadFavoriteNews();
 
 
