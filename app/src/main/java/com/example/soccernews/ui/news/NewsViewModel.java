@@ -2,6 +2,7 @@ package com.example.soccernews.ui.news;
 
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -29,11 +30,11 @@ public class NewsViewModel extends ViewModel {
 
     }
 
-    private void findNews() {
+    public void findNews() {
         state.setValue(State.DOING);
         SoccerNewsRepository.getInstance().getRemoteApi().getNews().enqueue(new Callback<List<News>>() {
             @Override
-            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+            public void onResponse(@NonNull Call<List<News>> call, @NonNull Response<List<News>> response) {
                 if( response.isSuccessful()){
                     news.setValue(response.body());
                     state.setValue(State.DONE);
@@ -43,8 +44,7 @@ public class NewsViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<News>> call, Throwable t) {
-                t.printStackTrace();
+            public void onFailure(@NonNull Call<List<News>> call, @NonNull Throwable error) {
                 state.setValue(State.ERROR);
             }
         });
